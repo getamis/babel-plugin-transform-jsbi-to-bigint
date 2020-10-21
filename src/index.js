@@ -147,9 +147,7 @@ export default function(babel) {
     visitor: {
       Program: {
         exit() {
-          for (const path of this.remove) {
-            path.remove();
-          }
+          this.remove.forEach(p => !p.removed && p.remove());
         },
       },
       ImportDeclaration(path) {
